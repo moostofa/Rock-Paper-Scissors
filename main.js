@@ -1,3 +1,8 @@
+// wait for user to click "Begin a game" button, then run the JS code
+document.addEventListener("DOMContentLoaded", () => {
+    document.getElementById("start").addEventListener("click", () => game())
+})
+
 const options = ["Rock", "Paper", "Scissors"]
 
 const winningPairs = [
@@ -36,8 +41,7 @@ function playRound(playerSelection, computerSelection) {
 
 // play a game - by default, a game will consist of 5 rounds
 function game() {
-    console.log("No game functionality yet!")
-    /*
+
     for (let i = 1; i <= 5; i++) {
         const playerSelection = getUserChoice()
         const computerSelection = computerPlay()
@@ -50,5 +54,4 @@ function game() {
         console.log(`Round ${i} - result: ${result}`)
         alert(result)
     }
-    */
 }
