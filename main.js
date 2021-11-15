@@ -43,13 +43,27 @@ function playRound(playerSelection, computerSelection) {
 // play a game - by default, a game will consist of 5 rounds
 function game() {
     console.log("No game functionality yet!")
-    const btns = document.getElementById("options")
+
+    // hide the "start game" button after it is clicked
+    document.getElementById("start").style.display = "none"
+
+    // create buttons for rock, paper and scissors and display it in the "options" div
+    const btnsDiv = document.getElementById("options")
     for (let option of options) {
         let btn = document.createElement("button")
         btn.innerHTML = option
         btn.value = option
-        btns.append(btn)
+        btn.classList = "option"
+        btnsDiv.append(btn)
     }
+
+    // listen for onclick event on each of the buttons
+    const btns = document.querySelectorAll(".option")
+    btns.forEach(btn => {
+        btn.addEventListener("click", () => {
+            console.log(btn.value)
+        })
+    })
     /*
     for (let i = 1; i <= 5; i++) {
         const playerSelection = getUserChoice()
