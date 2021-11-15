@@ -2,29 +2,18 @@ const options = ["Rock", "Paper", "Scissors"]
 
 const winningPairs = [
     ["Rock", "Scissors"],
-    ["Scissor", "Paper"],
+    ["Scissors", "Paper"],
     ["Paper", "Rock"]
 ]
 
-// wait for user to click "Begin a game" button, then run the JS code
+// wait for user to click "Begin a game" button, then run the game() init function
 document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("start").addEventListener("click", () => game())
 })
 
-
-// get user input and canonicalize it, and check if it is a valid option
-function getUserChoice() {
-    let choice = prompt("Rock, paper, or scissors? ").trim().toLowerCase().replace(/[^a-z]/g, "")
-    return choice.charAt(0).toUpperCase() + choice.slice(1)
-}
-
-// generate a random choice for the computer
-function computerPlay() {
-    return options[Math.floor(Math.random() * options.length)]
-}
-
 // play 1 round of the game
 function playRound(playerSelection, computerSelection) {
+    document.getElementById("start").style.display = "block"
     if (playerSelection === computerSelection)
         return `It's a tie! Both you and the computer chose ${playerSelection}`
 
@@ -42,8 +31,6 @@ function playRound(playerSelection, computerSelection) {
 
 // play a game - by default, a game will consist of 5 rounds
 function game() {
-    console.log("No game functionality yet!")
-
     // hide the "start game" button after it is clicked
     document.getElementById("start").style.display = "none"
 
@@ -61,7 +48,7 @@ function game() {
     const btns = document.querySelectorAll(".option")
     btns.forEach(btn => {
         btn.addEventListener("click", () => {
-            console.log(btn.value)
+            console.log(playRound(btn.value, options[Math.floor(Math.random() * options.length)]))
         })
     })
     /*
