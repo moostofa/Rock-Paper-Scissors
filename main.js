@@ -19,13 +19,13 @@ function computerPlay() {
 
 // play 1 round of the game
 function playRound(playerSelection, computerSelection) {
-    if (playerSelection == computerSelection)
+    if (playerSelection === computerSelection)
         return `It's a tie! Both you and the computer chose ${playerSelection}`
 
     for (let pair of winningPairs) 
-        if (playerSelection === pair[0] && computerSelection == pair[1])
+        if (playerSelection === pair[0] && computerSelection === pair[1])
             return `You win! ${playerSelection} beats ${computerSelection}`
-        else if (computerSelection === pair[0] && playerSelection == pair[1])
+        else if (computerSelection === pair[0] && playerSelection === pair[1])
             return `You lose! ${computerSelection} beats ${playerSelection}`
 
     return `There is no winner because you did not choose Rock, paper or scissors. You chose ${playerSelection}`
@@ -46,5 +46,3 @@ function game() {
         alert(result)
     }
 }
-
-game()
