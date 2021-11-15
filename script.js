@@ -56,5 +56,8 @@ function playRound(playerSelection, computerSelection) {
             return {"winner":"You", "loser":"Computer"}
         else if (computerSelection === pair[0] && playerSelection === pair[1])
             return {"winner":"Computer", "loser":"You"}
-    return `There is no winner because you did not choose Rock, paper or scissors. You chose ${playerSelection}`
+    return `
+    There is no winner because you did not choose Rock, paper or scissors. 
+    You chose ${playerSelection}
+    `
 }
