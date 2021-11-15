@@ -25,7 +25,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // play 1 round of the game
 function playRound(playerSelection, computerSelection) {
-    document.getElementById("start").style.display = "block"
+    // reveal the button which allows user to play another round, and hide the RPS options
+    let startButton = document.getElementById("start")
+    startButton.innerHTML = "Play another round"
+    startButton.style.display = "block"
     document.getElementById("options").style.display = "none"
 
     if (playerSelection === computerSelection)
