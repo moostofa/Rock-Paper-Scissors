@@ -6,33 +6,39 @@ const winningPairs = [
     ["Paper", "Rock"]
 ]
 
-// create RPS buttons, and wait for user to click "Begin a game" button to run the game() function
+// create RPS buttons, and wait for user to click "Begin a game" button
 document.addEventListener("DOMContentLoaded", () => {
-    // create RPS buttons and display it in the "options" div, which will initially be hidden
-    const btnsDiv = document.getElementById("options")
-    btnsDiv.style.display = "none"
-    for (let option of options) {
-        let btn = document.createElement("button")
-        btn.innerHTML = option
-        btn.value = option
-
-        // add an "onclick" eventListener to each RPS button
-        btn.addEventListener("click", () => {
-            // 1st parameter: user's choice, 2nd parameter = randomly generated choice for computer
-            console.log(playRound(btn.value, options[Math.floor(Math.random() * options.length)]))
-        })
-        btnsDiv.append(btn)
-    }
-    // if user clicks "start a game" button, display the RPS buttons
+    createButtons()
+    // if user clicks "start a game" button, hide the "start" button and display the RPS buttons
     document.getElementById("start").addEventListener("click", () => {
-        // hide start button and display the RPS buttons 
         document.getElementById("start").style.display = "none"
         document.getElementById("options").style.display = "block"
     })
 })
 
+// create RPS buttons and display it in the "options" div, which will initially be hidden
+function createButtons() {
+    const btnsDiv = document.getElementById("options")
+    btnsDiv.style.display = "none"
+
+    for (let option of options) {
+        let btn = document.createElement("button")
+        btn.innerHTML = option
+        btn.value = option
+
+        // listen for "onclick" event for each RPS button
+        btn.addEventListener("click", () => {
+            console.log(playRound(btn.value))
+        })
+        btnsDiv.append(btn)
+    }
+}
+
 // play 1 round of the game
-function playRound(playerSelection, computerSelection) {
+function playRound(playerSelection) {
+    // generate a random choice for the computer
+    const computerSelection = options[Math.floor(Math.random() * options.length)]
+
     // reveal the button which allows user to play another round, and hide the RPS buttons
     let startButton = document.getElementById("start")
     startButton.innerHTML = "Play another round"
