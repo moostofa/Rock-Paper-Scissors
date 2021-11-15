@@ -34,28 +34,29 @@ function playRound(playerSelection, computerSelection) {
     if (playerSelection === computerSelection)
         return `It's a tie! Both you and the computer chose ${playerSelection}`
 
+    // find a win/loss pair
     for (let pair of winningPairs) {
-        const winner = pair[0]
-        const loser = pair[1]
-
-        if (playerSelection === winner && computerSelection === loser)
-            return `You win! ${playerSelection} beats ${computerSelection}`
-        else if (computerSelection === winner && playerSelection === loser)
-            return `You lose! ${computerSelection} beats ${playerSelection}`
+        if (playerSelection === pair[0] && computerSelection === pair[1])
+            return {"winner":"You", "loser":"Computer"}
+        else if (computerSelection === pair[0] && playerSelection === pair[1])
+            return {"winner":"Computer", "loser":"You"}
     }
     return `There is no winner because you did not choose Rock, paper or scissors. You chose ${playerSelection}`
 }
 
 // display RPS buttons and start a game state
 function game() {
+    // hide start button and display the RPS buttons 
     document.getElementById("start").style.display = "none"
-    // display the RPS buttons and listen for onclick event on each of the buttons
     document.getElementById("options").style.display = "block"
+
+    // listen for onclick event on each of the buttons
     const btns = document.querySelectorAll(".option")
     btns.forEach(btn => {
         btn.addEventListener("click", () => {
             // 1st parameter: user's choice, 2nd parameter = randomly generated choice for computer
             console.log(playRound(btn.value, options[Math.floor(Math.random() * options.length)]))
+            return
         })
     })
 }
