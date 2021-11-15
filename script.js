@@ -13,6 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("start").addEventListener("click", () => {
         document.getElementById("start").style.display = "none"
         document.getElementById("options").style.display = "block"
+        document.getElementById("results").style.display = "block"
     })
 })
 
@@ -26,7 +27,7 @@ function createButtons() {
         btn.innerHTML = option
         btn.value = option
 
-        // listen for "onclick" event for each RPS button
+        // listen for "onclick" event for each RPS button - then, play 1 round of the game with that choice
         btn.addEventListener("click", () => {
             console.log(playRound(btn.value))
         })
@@ -47,16 +48,32 @@ function playRound(playerSelection) {
 
     // check if the match is a tie
     if (playerSelection === computerSelection)
-        return `It's a tie! Both you and the computer chose ${playerSelection}`
+        return {"user":playerSelection, "computer":computerSelection, "result":"It's a tie!"}
 
-    // find a win/loss pair
-    for (let pair of winningPairs) 
-        if (playerSelection === pair[0] && computerSelection === pair[1])
-            return {"winner":"You", "loser":"Computer"}
-        else if (computerSelection === pair[0] && playerSelection === pair[1])
-            return {"winner":"Computer", "loser":"You"}
-    return `
-    There is no winner because you did not choose Rock, paper or scissors. 
-    You chose ${playerSelection}
-    `
+    // find a win/loss pair. If not found, user chose an invalid option
+    for (let pair of winningPairs) {
+        const win = pair[0]
+        const lose = pair[1]
+        if (playerSelection === win && computerSelection === lose)
+            return {
+                "user":playerSelection, 
+                "computer":computerSelection, 
+                "result":"You win!"
+            }
+        else if (computerSelection === win && playerSelection === lose)
+            return {
+                "user":playerSelection, 
+                "computer":computerSelection, 
+                "result":"You lose."
+            }
+    }
+    return {
+        "user":playerSelection, 
+        "computer":computerSelection, 
+        "result":"Invalid choice."
+    }
+}
+
+function displayResult(result) {
+
 }
