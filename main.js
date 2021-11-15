@@ -1,8 +1,3 @@
-// wait for user to click "Begin a game" button, then run the JS code
-document.addEventListener("DOMContentLoaded", () => {
-    document.getElementById("start").addEventListener("click", () => game())
-})
-
 const options = ["Rock", "Paper", "Scissors"]
 
 const winningPairs = [
@@ -10,6 +5,12 @@ const winningPairs = [
     ["Scissor", "Paper"],
     ["Paper", "Rock"]
 ]
+
+// wait for user to click "Begin a game" button, then run the JS code
+document.addEventListener("DOMContentLoaded", () => {
+    document.getElementById("start").addEventListener("click", () => game())
+})
+
 
 // get user input and canonicalize it, and check if it is a valid option
 function getUserChoice() {
@@ -41,7 +42,15 @@ function playRound(playerSelection, computerSelection) {
 
 // play a game - by default, a game will consist of 5 rounds
 function game() {
-
+    console.log("No game functionality yet!")
+    const btns = document.getElementById("options")
+    for (let option of options) {
+        let btn = document.createElement("button")
+        btn.innerHTML = option
+        btn.value = option
+        btns.append(btn)
+    }
+    /*
     for (let i = 1; i <= 5; i++) {
         const playerSelection = getUserChoice()
         const computerSelection = computerPlay()
@@ -54,4 +63,5 @@ function game() {
         console.log(`Round ${i} - result: ${result}`)
         alert(result)
     }
+    */
 }
