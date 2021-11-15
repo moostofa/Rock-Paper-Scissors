@@ -6,6 +6,7 @@ const winningPairs = [
     ["Paper", "Rock"]
 ]
 
+// get user input and canonicalize it
 function getUserChoice() {
     let choice = prompt("Rock, paper, or scissors? ").trim().toLowerCase().replace(/[^a-z]/g, "")
     return choice.charAt(0).toUpperCase() + choice.slice(1)
@@ -16,6 +17,7 @@ function computerPlay() {
     return options[Math.floor(Math.random() * options.length)]
 }
 
+// play 1 round of the game
 function playRound(playerSelection, computerSelection) {
     if (playerSelection == computerSelection)
         return `It's a tie! Both you and the computer chose ${playerSelection}`
@@ -29,10 +31,20 @@ function playRound(playerSelection, computerSelection) {
     return `There is no winner because you did not choose Rock, paper or scissors. You chose ${playerSelection}`
 }
 
-const playerSelection = getUserChoice()
-const computerSelection = computerPlay()
+// play a game - by default, a game will consist of 5 rounds
+function game() {
+    for (let i = 1; i <= 5; i++) {
+        const playerSelection = getUserChoice()
+        const computerSelection = computerPlay()
+        
+        console.log(`Round ${i} - Player selection: ${playerSelection}`)
+        console.log(`Round ${i} - Computer selection: ${computerSelection}`)
 
-console.log(`Player selection: ${playerSelection}`)
-console.log(`Computer selection: ${computerSelection}`)
+        const result = playRound(playerSelection, computerSelection)
 
-game(playerSelection, computerSelection)
+        console.log(`Round ${i} - result: ${result}`)
+        alert(result)
+    }
+}
+
+game()
