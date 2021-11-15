@@ -15,28 +15,21 @@ document.addEventListener("DOMContentLoaded", () => {
         let btn = document.createElement("button")
         btn.innerHTML = option
         btn.value = option
-        btn.classList = "option"
-        btnsDiv.append(btn)
-    }
-    // if user clicks "start a game" button, play a round of RPS
-    document.getElementById("start").addEventListener("click", () => game())
-})
 
-// start a new game
-function game() {
-    // hide start button and display the RPS buttons 
-    document.getElementById("start").style.display = "none"
-    document.getElementById("options").style.display = "block"
-
-    // listen for onclick event on each of the buttons
-    const btns = document.querySelectorAll(".option")
-    btns.forEach(btn => {
+        // add an "onclick" eventListener to each RPS button
         btn.addEventListener("click", () => {
             // 1st parameter: user's choice, 2nd parameter = randomly generated choice for computer
             console.log(playRound(btn.value, options[Math.floor(Math.random() * options.length)]))
         })
+        btnsDiv.append(btn)
+    }
+    // if user clicks "start a game" button, display the RPS buttons
+    document.getElementById("start").addEventListener("click", () => {
+        // hide start button and display the RPS buttons 
+        document.getElementById("start").style.display = "none"
+        document.getElementById("options").style.display = "block"
     })
-}
+})
 
 // play 1 round of the game
 function playRound(playerSelection, computerSelection) {
