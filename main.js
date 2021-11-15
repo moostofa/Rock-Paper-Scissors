@@ -6,7 +6,7 @@ const winningPairs = [
     ["Paper", "Rock"]
 ]
 
-// get user input and canonicalize it
+// get user input and canonicalize it, and check if it is a valid option
 function getUserChoice() {
     let choice = prompt("Rock, paper, or scissors? ").trim().toLowerCase().replace(/[^a-z]/g, "")
     return choice.charAt(0).toUpperCase() + choice.slice(1)
@@ -22,17 +22,22 @@ function playRound(playerSelection, computerSelection) {
     if (playerSelection === computerSelection)
         return `It's a tie! Both you and the computer chose ${playerSelection}`
 
-    for (let pair of winningPairs) 
-        if (playerSelection === pair[0] && computerSelection === pair[1])
-            return `You win! ${playerSelection} beats ${computerSelection}`
-        else if (computerSelection === pair[0] && playerSelection === pair[1])
-            return `You lose! ${computerSelection} beats ${playerSelection}`
+    for (let pair of winningPairs) {
+        const winner = pair[0]
+        const loser = pair[1]
 
+        if (playerSelection === winner && computerSelection === loser)
+            return `You win! ${playerSelection} beats ${computerSelection}`
+        else if (computerSelection === winner && playerSelection === loser)
+            return `You lose! ${computerSelection} beats ${playerSelection}`
+    }
     return `There is no winner because you did not choose Rock, paper or scissors. You chose ${playerSelection}`
 }
 
 // play a game - by default, a game will consist of 5 rounds
 function game() {
+    console.log("No game functionality yet!")
+    /*
     for (let i = 1; i <= 5; i++) {
         const playerSelection = getUserChoice()
         const computerSelection = computerPlay()
@@ -45,4 +50,5 @@ function game() {
         console.log(`Round ${i} - result: ${result}`)
         alert(result)
     }
+    */
 }
