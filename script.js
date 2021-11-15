@@ -6,6 +6,8 @@ const winningPairs = [
     ["Paper", "Rock"]
 ]
 
+let round = 0
+
 // create RPS buttons, and wait for user to click "Begin a game" button
 document.addEventListener("DOMContentLoaded", () => {
     createButtons()
@@ -29,7 +31,7 @@ function createButtons() {
 
         // listen for "onclick" event for each RPS button - then, play 1 round of the game with that choice
         btn.addEventListener("click", () => {
-            console.log(playRound(btn.value))
+            displayResult(playRound(btn.value))
         })
         btnsDiv.append(btn)
     }
@@ -75,5 +77,15 @@ function playRound(playerSelection) {
 }
 
 function displayResult(result) {
+    const row = document.createElement("tr")
+    let roundNumber = document.createElement("td")
+    roundNumber.innerHTML = ++round;
+    row.appendChild(roundNumber)
 
+    Object.values(result).forEach(value => {
+        let resultCell = document.createElement("td")
+        resultCell.innerHTML = value
+        row.appendChild(resultCell)
+    })
+    document.getElementById("results").appendChild(row)
 }
