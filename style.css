@@ -1,8 +1,15 @@
 #results-table {
     display: none;
-    width: 30%;
-    margin: 0 auto;
 }
+    #results-table tr {
+        border: 1px solid rebeccapurple;
+    }
+    #results-table th, td {
+        background-color: aliceblue;
+        font-size: large;
+        width: 10%;
+        padding: 10px;
+    }
 
 .btn {
     margin: 2px;

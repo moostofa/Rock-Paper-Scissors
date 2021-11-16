@@ -15,6 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // if user clicks "start a game" button, hide the "start" button and display the RPS buttons and results table
     document.getElementById("start").addEventListener("click", () => {
         document.getElementById("start").style.display = "none"
+        document.getElementById("instructions").innerHTML = "Rock, paper, or scissors?"
         document.getElementById("options").style.display = "block"
         document.getElementById("results-table").style.display = "block"
     })
@@ -55,31 +56,24 @@ function playRound(playerSelection) {
         return {"user":playerSelection, "computer":computerSelection, "result":"It's a tie!"}
 
     // find a win/loss pair. If not found, user chose an invalid option
-    for (let pair of winningPairs) {
-        const win = pair[0]
-        const lose = pair[1]
-        if (playerSelection === win && computerSelection === lose)
-            return {
-                "user":playerSelection, 
-                "computer":computerSelection, 
-                "result":"You win!"
-            }
-        else if (computerSelection === win && playerSelection === lose)
-            return {
-                "user":playerSelection, 
-                "computer":computerSelection, 
-                "result":"You lose."
-            }
-    }
+    let result = "Invalid choice."
+    for (let pair of winningPairs)
+        if (playerSelection === pair[0] && computerSelection === pair[1])
+            result = "You win!"
+        else if (computerSelection === pair[0] && playerSelection === pair[1])
+            result = "You lose."
     return {
         "user":playerSelection, 
         "computer":computerSelection, 
-        "result":"Invalid choice."
+        "result":result
     }
 }
 
 // display the results of each round in a table format
 function displayResult(result) {
+    // give user the instruction to play another round if they want to
+    document.getElementById("instructions").innerHTML = `${result["result"]} Play another round?`
+
     // create a table row for the current round
     const row = document.createElement("tr")
     let roundNumber = document.createElement("td")
