@@ -6,16 +6,17 @@ const winningPairs = [
     ["Paper", "Rock"]
 ]
 
+// keep track of the number of rounds played
 let round = 0
 
 // create RPS buttons, and wait for user to click "Begin a game" button
 document.addEventListener("DOMContentLoaded", () => {
     createButtons()
-    // if user clicks "start a game" button, hide the "start" button and display the RPS buttons
+    // if user clicks "start a game" button, hide the "start" button and display the RPS buttons and results table
     document.getElementById("start").addEventListener("click", () => {
         document.getElementById("start").style.display = "none"
         document.getElementById("options").style.display = "block"
-        document.getElementById("results").style.display = "block"
+        document.getElementById("results-table").style.display = "block"
     })
 })
 
@@ -28,6 +29,7 @@ function createButtons() {
         let btn = document.createElement("button")
         btn.innerHTML = option
         btn.value = option
+        btn.classList = "btn btn-primary"
 
         // listen for "onclick" event for each RPS button - then, play 1 round of the game with that choice
         btn.addEventListener("click", () => {
@@ -45,7 +47,7 @@ function playRound(playerSelection) {
     // reveal the button which allows user to play another round, and hide the RPS buttons
     let startButton = document.getElementById("start")
     startButton.innerHTML = "Play another round"
-    startButton.style.display = "block"
+    startButton.style.display = "inline"
     document.getElementById("options").style.display = "none"
 
     // check if the match is a tie
@@ -76,16 +78,19 @@ function playRound(playerSelection) {
     }
 }
 
+// display the results of each round in a table format
 function displayResult(result) {
+    // create a table row for the current round
     const row = document.createElement("tr")
     let roundNumber = document.createElement("td")
     roundNumber.innerHTML = ++round;
     row.appendChild(roundNumber)
 
+    // fill in row cells with Object values received from the playRound() function
     Object.values(result).forEach(value => {
         let resultCell = document.createElement("td")
         resultCell.innerHTML = value
         row.appendChild(resultCell)
     })
-    document.getElementById("results").appendChild(row)
+    document.getElementById("results").append(row)
 }

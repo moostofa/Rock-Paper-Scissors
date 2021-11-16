@@ -1,3 +1,17 @@
-#results {
+#results-table {
     display: none;
+    width: 30%;
+    margin: 0 auto;
+}
+
+.btn {
+    margin: 2px;
+}
+
+body {
+    text-align: center;
+}
+
+div {
+    margin: 10px;
 }
