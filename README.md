@@ -1,6 +1,8 @@
 # Rock Paper Scissors
 A simple implementation of the rock paper scissors game, using HTML, CSS and JavaScript
 
+[Live demo](https://moostofa.github.io/Rock-Paper-Scissors/)
+
 # The landing page
 When you fire up the webpage, you will be greeted with a title asking you to play a game of rock, paper scissors.
 
